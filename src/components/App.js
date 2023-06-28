@@ -24,8 +24,13 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <h1>Hello, World!</h1>
+      <header> 
+      <h1>Welcome to Git Baked! Your online bakery.</h1>
       <p>API Status: {APIHealth}</p>
+      <nav>
+        <link> </link>
+      </nav>
+      </header>
     </div>
   );
 };
