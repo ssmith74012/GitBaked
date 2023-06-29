@@ -1,58 +1,101 @@
-import React from "react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
-const SignUp = ({setToken}) => {
-    const [userName, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+const Register = ({ setAuthToken }) => {
+    
     const navigate = useNavigate();
-    const DB_NAME = 'Pie-Or-Dye';
+    // const [email, setUsername] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [regResponse, setRegResponse] = useState('');
+  
+    const DB_NAME = 'Git-Baked';
     const DB_URL =
   process.env.DATABASE_URL || `postgres://localhost:5432/${DB_NAME}`;
-const Register = async (event) => {
-    event.preventDefault();
-try {
-    const response = await fetch (`${DB_URL}/users/register`, {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            user: {
-                username: userName,
-                password: password
-            }
-         })
-    });
-    const result = await response.json();
-    console.log(result);
-    // setToken(result.data.token);
-    navigate("/login");
-    // return result
-} catch (err) {
-    console.error(err);
-}
-}
-/* async function signUpUser() {
-    try{
-        const response = await fetch(``)
+  
+    
+
+    const handleemail = (e) => {
+        setEmail(e.target.value);
+        
     }
-}*/
-    return(
-        <>
-        <form class="posts" onSubmit={Register}>
-            <h1 class="home"> Sign Up Page </h1>
-            <p>Username:</p>
-            <input value={userName} onChange={(event)=>{setUsername(event.target.value)}} placeholder="Username"></input>
-            <p>Password:</p>
-            <input value={password} onChange={(event)=>{setPassword(event.target.value)}}placeholder="Password"></input>
-            <p> Confirm Password: </p>
-            <input value={confirmPassword} onChange={(event)=>{setConfirmPassword(event.target.value)}}placeholder="Confirm Password"></input>
-            <br></br>
-            <button>Submit</button>
-        </form>
-        </>
-    )
-}
-export default SignUp;
+
+    const handlePassword = (e) => {
+        setPassword(e.target.value)
+    }
+
+    const handleSubmit= async (e) => {
+        e.preventDefault();
+
+    
+
+        try {
+            const response = await fetch(`${DB_NAME}/users/register`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            });
+            const json = await response.json()
+            
+            if(!json.error) {
+                setAuthToken(json.token)
+                window.localStorage.setItem('st-token', json.token)
+                setRegResponse(json.message)
+                
+                
+                navigate('/');
+            } else {
+                setRegResponse(json.error);
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    return (
+      <div>
+        <div className='content'>
+            <h2>Register</h2>
+            <Box
+                component="form"
+                sx={{
+                    '& .MuiTextField-root': { m: 1, width: '25ch' },
+                }}
+                noValidate
+                autoComplete="off"
+                className='reg-form'
+                onSubmit={handleSubmit}
+                >            
+                <TextField
+                    required
+                    id="outlined-required"
+                    label="email"
+                    className='reg-form-elem'
+                    value={email}
+                    onChange={handleemail}
+                    />
+                <TextField
+                    required
+                    id="outlined-required"
+                    label="Password"
+                    className='reg-form-elem'
+                    value={password}
+                    onChange={handlePassword}
+                    />
+                <Button className='reg-form-elem' type='submit' variant="contained">Register</Button>
+                <h4>{regResponse ? regResponse : ''}</h4>
+            </Box>
+        </div>
+    </div>
+    );
+  }
+  
+export default Register;

@@ -23,6 +23,34 @@
 
 .links {
   display: flex;
-  padding: 1rem;
   justify-content: center;
+}
+
+.link {
+  padding-right: 10px;
+}
+
+.link-one {
+  padding-right: 10px;
+}
+
+.link-two {
+  padding-right: 10px;
+}
+
+.reg-form-elem {
+  display: flex;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  /* max-width: 100%; */
+  padding: 2px;
+  flex-direction: row;
+
+  /* justify-content: center; */
+  border-top: 2px solid black;
+  color: green;
+  position: static;
 }
