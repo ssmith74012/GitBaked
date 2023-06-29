@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-
-
+import { Link } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
-// getAPIHealth is defined in our axios-services directory index.js
-// you can think of that directory as a collection of api adapters
-// where each adapter fetches specific info from our express server's /api route
 import { getAPIHealth } from '../axios-services';
+import Login from './Login';
+import SignUp from './Register';
 import '../style/App.css';
 
 const App = () => {
@@ -29,17 +27,21 @@ const App = () => {
     <div className="app-container">
       <header> 
       <h1>Welcome to Git Baked! Your online bakery.</h1>
+      <h2> Home </h2>
       <p>API Status: {APIHealth}</p>
-      {/* <nav>
-        <link to="/login"> Login </link>
+      <div className='links'>
+      <Link to='/login'> Login </Link>
+      <Link to='/register'> Register </Link>
+      <Link to='/products'> Products </Link>
+      </div>
 
-      </nav> */}
       </header>
     
       <Routes>
-        <Route path="/" element={<h2> Home </h2>} />
-        <Route path="/login" element={<h2> Login </h2>} />
-
+        <Route path="/"/>
+        <Route path="login" element={<Login />} />
+        <Route path="/register" element={<SignUp/>} />
+        <Route path="/products" element={<h2> Products </h2>} />
       </Routes>
     </div>
   );
