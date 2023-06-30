@@ -63,59 +63,6 @@ const App = () => {
         />
         <Route path="products" element={<h2> Products </h2>} />
       </Routes>
-
-      <footer className="footer">
-        <ul>
-          <h3>Products</h3>
-          <Link>
-            <li>All</li>
-          </Link>
-          <Link>
-            <li>Bagels</li>
-          </Link>
-          <Link>
-            <li>Cakes</li>
-          </Link>
-          <Link>
-            <li>Cookies</li>
-          </Link>
-          <Link>
-            <li>Pies</li>
-          </Link>
-        </ul>
-
-        <ul>
-          <h3>Recipes</h3>
-          <Link>
-            <li>Breakfast</li>
-          </Link>
-          <Link>
-            <li>Lunch</li>
-          </Link>
-          <Link>
-            <li>Dinner</li>
-          </Link>
-          <Link>
-            <li>Dessert</li>
-          </Link>
-        </ul>
-
-        <ul>
-          <h3>About Us</h3>
-          <Link>
-            <li>Careers</li>
-          </Link>
-          <Link>
-            <li>Blog</li>
-          </Link>
-          <Link>
-            <li>Our History</li>
-          </Link>
-          <Link>
-            <li>Contact Us</li>
-          </Link>
-        </ul>
-      </footer>
     </div>
   );
 };
